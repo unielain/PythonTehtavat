@@ -8,4 +8,4 @@ elif kuukausi == "maaliskuu" or kuukausi == "huhtikuu" or kuukausi == "toukokuu"
 elif kuukausi == "kesäkuu" or kuukausi == "heinäkuu" or kuukausi == "elokuu":
     print(kuukausi, "on kesällä")
 elif kuukausi == "syyskuu" or kuukausi == "lokakuu" or kuukausi == "marraskuu":
-    print(kuukausi, "on syksyllä")
+    print(kuukausi, "on syksyllä"
