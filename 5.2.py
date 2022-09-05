@@ -1,7 +1,7 @@
 luku = 0
 luvut = []
 i = 0
-while luku != "":
+while True:
     luku = input("Anna luku: ")
     if luku == "":
         break
