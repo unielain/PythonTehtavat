@@ -3,6 +3,7 @@ def hae_maa(maakoodi):
     sql = 'select type, count(*) from airport'
     sql += ' WHERE iso_country="'+maakoodi+'"'
     sql += ' group by type'
+    sql += ' order by count(*)'
     #print(sql)
     kursori = yhteys.cursor()
     kursori.execute(sql)
