@@ -3,6 +3,5 @@ inch = 0
 while inch > -1:
     inch = int(input("Inches: "))
     cm = 2.54 * inch
-    print(cm)
-    if cm < -1:
-        break
+    if cm > -1:
+        print(cm)
