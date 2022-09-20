@@ -1,5 +1,6 @@
+# a program that prints numbers up to 1000 that can be factored by 3.
+
 i = 0
-while i < 1001:
-    if i % 3 == 0:
-        print(i)
-    i += 1
+while i < 999:
+    i += 3
+    print(i)
