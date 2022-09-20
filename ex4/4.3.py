@@ -6,4 +6,5 @@ while number != "":
     if number != "":
         int(number)
         numbers.append(number)
-print(f"Suurin: {max(numbers)}\nPienin: {min(numbers)}")
+print(f"Suurin: {max(numbers)}"
+      f"\nPienin: {min(numbers)}")
