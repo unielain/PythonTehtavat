@@ -1,6 +1,8 @@
-tuuma = 0
-while tuuma > -1:
-    tuuma = int(input("Tuumat: "))
-    sentit = 2.54 * tuuma
-    if sentit > -1:
-        print(sentit)
+# a simple program that converts inches to centimeters until the user input is negative
+inch = 0
+while inch > -1:
+    inch = int(input("Inches: "))
+    cm = 2.54 * inch
+    print(cm)
+    if cm < -1:
+        break
