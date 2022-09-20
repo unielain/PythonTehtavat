@@ -1,13 +1,16 @@
+# a simple program to convert old units to grams and kilograms
 
-leiviska = float(input("Anna leiviskät."))
-naula = float(input("Anna naulat."))
-luoti = float(input("Anna luodit."))
+talent = float(input("Give talents: "))
+pound = float(input("Give pounds: "))
+plumb = float(input("Give plumbs: "))
 
-luoti2 = 13.3
-naula2 = 32 * luoti2
-leiviska2 = 20 * naula2
-grammat = (leiviska * leiviska2) + (naula * naula2) + (luoti * luoti2)
-kilot = grammat // 1000
-grammat2 = "{:.2f}".format(grammat - (kilot * 1000))
-kilot = int(kilot)
-print(f"Massa nykymittojen mukaan:\n {kilot} kilogrammaa ja {grammat2} grammaa.")
+plumb_in_grams = 13.3
+pound_in_grams = 32 * plumb_in_grams
+talent_in_grams = 20 * pound_in_grams
+grams = (talent * talent_in_grams) + (pound * pound_in_grams) + (plumb * plumb_in_grams)
+
+kgs = grams // 1000
+grams_formatted = "{:.2f}".format(grams - (kgs * 1000))
+kgs_formatted = int(kgs)
+print(f"Mass in modern units:"
+      f"\n{kgs_formatted} kg and {grams_formatted} g.")
