@@ -1,17 +1,15 @@
-kayttajatunnus = "python"
-salasana = "rules"
+# this program asks for the username and password until the user gets it right or has tried too many times
+username = "python"
+password = "rules"
 i = 0
-while i < 6:
-    kayttaja = input("Anna käyttäjätunnus: ")
-    salas = input("Anna salasana: ")
-    if i > 4:
-        print("Pääsy evätty!")
-        break
-    elif kayttajatunnus == kayttaja and salas == salasana:
-        print("Tervetuloa!")
+
+while i <= 4:
+    username_tried = input("Give a username: ")
+    password_tried = input("Give a password: ")
+    if username == username_tried and password_tried == password:
+        print("welcome!")
         break
     else:
-        print("Pääsy evätty!")
-        #print(f"Yrityksiä jäljellä: {4 - i}")
-        i += 1
+        print("Access denied.")
+    i += 1
 
