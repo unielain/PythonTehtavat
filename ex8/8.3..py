@@ -1,24 +1,29 @@
 import mysql.connector
 from geopy import distance
-def koordinaatit(icao: str):
-    koord = []
+# a simple program that searches the distances of two different airports
+
+
+# finds airport cordinates from database
+def cordinates(icao: str):
+    airport_cordinates = []
     sql = 'select latitude_deg, longitude_deg from airport'
     sql += ' where iata_code="'+icao+'"'
-    kursori = yhteys.cursor()
-    kursori.execute(sql)
-    tulos = kursori.fetchall()
-    koord.append(tulos)
-    return koord
+    cursor_for_func = connection.cursor()
+    cursor_for_func.execute(sql)
+    result = cursor_for_func.fetchall()
+    airport_cordinates.append(result)
+    return airport_cordinates
 
 
-def hae_etaisyys(koord1, koord2):
-    kentta1 = (koord1[0:1])
-    kentta2 = (koord2[0:1])
-    print(f"The distance between airports is {round(distance.distance(kentta1, kentta2).km,3)} km")
+def find_distance(cord1, cord2):
+    airport1 = (cord1[0:1])
+    airport2 = (cord2[0:1])
+    print(f"The distance between airports is {round(distance.distance(airport1, airport2).km,3)} km")
     return
 
-#Main
-yhteys = mysql.connector.connect(
+
+# connection to database
+connection = mysql.connector.connect(
     host='localhost',
     port=3306,
     database='flight_game',
@@ -28,11 +33,12 @@ yhteys = mysql.connector.connect(
 )
 icaos = []
 i = 0
+
 while i < 2:
-    icao_koodi = input("Give the icao:" )
-    icaos.append(icao_koodi)
+    icao_code_main = input("Give the icao:")
+    icaos.append(icao_code_main)
     i += 1
 
-koords1 = koordinaatit(icaos[0])
-koords2 = koordinaatit(icaos[1])
-hae_etaisyys(koords1, koords2)
+cords1_main = cordinates(icaos[0])
+cords2_main = cordinates(icaos[1])
+find_distance(cords1_main, cords2_main)
