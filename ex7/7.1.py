@@ -1,17 +1,18 @@
-kuukaudet = ("tammikuu", "helmikuu", "maaliskuu", "huhtikuu", "toukokuu", "kesäkuu", "heinäkuu", "elokuu", "syyskuu", "lokakuu", "marraskuu", "joulukuu")
-while True:
-    #lisätty tarkistusluuppi siltä varalta, ettei käyttäjä anna järkevää numeroa
-    jarjestysnumero = int(input("Anna kuukauden numero (1-12): "))
-    if jarjestysnumero == 0 or jarjestysnumero not in range(len(kuukaudet) + 1):
-        print("Valitse numero väliltä 1-12")
-    else:
-        break
-kuukausi = kuukaudet[jarjestysnumero-1]
-if kuukausi == "joulukuu" or kuukausi == "tammikuu" or kuukausi == "helmikuu":
-    print(kuukausi, "on talvella")
-elif kuukausi == "maaliskuu" or kuukausi == "huhtikuu" or kuukausi == "toukokuu":
-    print(kuukausi, "on keväällä")
-elif kuukausi == "kesäkuu" or kuukausi == "heinäkuu" or kuukausi == "elokuu":
-    print(kuukausi, "on kesällä")
-elif kuukausi == "syyskuu" or kuukausi == "lokakuu" or kuukausi == "marraskuu":
-    print(kuukausi, "on syksyllä")
+# a simple program that tells which season month belongs to
+
+months = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+
+number_of_month = ""
+while number_of_month not in range(13):
+    # to ensure that the user gives a sensible number
+    number_of_month = int(input("Give the number of the month (1-12): "))
+
+month = months[number_of_month - 1]
+if month == "December" or month == "January" or month == "February":
+    print(month, "is in winter.")
+elif month == "March" or month == "April" or month == "May":
+    print(month, "is in spring.")
+elif month == "June" or month == "July" or month == "August":
+    print(month, "in summer.")
+elif month == "September" or month == "October" or month == "November":
+    print(month, "is in autumn.")
