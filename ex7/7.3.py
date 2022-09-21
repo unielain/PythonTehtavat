@@ -1,21 +1,26 @@
-lentoasemat = {}
+# a program that returns an airport depending on the ICAO code by the user.
+
+
+airports = {}
 while True:
-    print(" 'A' Hakee lentoaseman\n 'B' syöttää uuden lentoaseman \n 'C' lopettaa")
-    toiminto = input("Mitä haluat tehdä: ")
-    if toiminto == "A":
-        ICAO = input("Syötä aseman ICAO-koodi: ")
-        if ICAO in lentoasemat:
-            print(lentoasemat[ICAO])
+    print(" 'A' Search for an airport\n"
+          "'B' Add a new airport\n"
+          "'C' Exit")
+    action = input("What do you want to do: ")
+    if action == "A":
+        ICAO = input("Submit the ICAO for the airport: ")
+        if ICAO in airports:
+            print(airports[ICAO])
         else:
-            print("Lentoasemaa ei löydy")
-    elif toiminto == "B":
-        ICAO = input("Syötä aseman ICAO-koodi: ")
-        asema = input("Anna lentoaseman nimi: ")
-        if ICAO not in lentoasemat:
-            lentoasemat[ICAO] = asema
+            print("Could not find an airport matching the ICAO.")
+    elif action == "B":
+        ICAO = input("Submit the ICAO: ")
+        airport = input("Submit the airport name: ")
+        if ICAO not in airports:
+            airports[ICAO] = airport
         else:
-            print("Asema löytyy jo listalta.")
-    elif toiminto == "C":
+            print("Airport is already in the list.")
+    elif action == "C":
         break
 
 
