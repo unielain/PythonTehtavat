@@ -31,6 +31,7 @@ connection = mysql.connector.connect(
     password='m4*Rv1n42',
     autocommit=True
 )
+
 icaos = []
 i = 0
 
