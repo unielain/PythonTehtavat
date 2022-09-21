@@ -1,20 +1,23 @@
 import mysql.connector
-def haeICAO(icao_koodi):
+# a simple program that searches an aiport from database matching to ICAO-code submitted by the user.
+
+
+def find_icao(icao_code):
     sql = 'select name from airport'
-    sql += ' WHERE iata_code="'+icao_koodi+'"'
-    #print(sql)
-    kursori = yhteys.cursor()
-    kursori.execute(sql)
-    tulos = kursori.fetchall()
-    if kursori.rowcount > 0:
-        for rivi in tulos:
-            print(f"Antamasi koodi kuuluu {rivi[0]}-lentokentälle")
+    sql += ' WHERE iata_code="' + icao_code + '"'
+    cursor_find_icao = connection.cursor()
+    cursor_find_icao.execute(sql)
+    result = cursor_find_icao.fetchall()
+    if cursor_find_icao.rowcount > 0:
+        for row in result:
+            print(f"The ICAO belongs to {row[0]}")
     else:
-        print(f"Koodilla {icao_koodi} ei löytynyt yhtään kenttää")
+        print(f"Could not find any airport with {icao_code}")
     return
 
-#Main
-yhteys = mysql.connector.connect(
+
+# Connection to database
+connection = mysql.connector.connect(
     host='localhost',
     port=3306,
     database='flight_game',
@@ -23,5 +26,6 @@ yhteys = mysql.connector.connect(
     autocommit=True
 )
 
-icao_koodi = input("Anna icao:" )
-haeICAO(icao_koodi)
+# Main
+icao_code_main = input("Anna icao: ")
+find_icao(icao_code_main)
