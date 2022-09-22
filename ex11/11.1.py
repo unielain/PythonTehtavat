@@ -1,37 +1,47 @@
-class Julkaisu:
-    def __init__(self, nimi):
-        self.nimi = nimi
-    def tulosta_tiedot(self):
-        return f"nimi:{self.nimi}"
+# a program to practice classes further
 
-class Kirja(Julkaisu):
-    def __init__(self, nimi, sivut, kirjoittanut):
-        super().__init__(nimi)
-        self.sivut = sivut
-        self.kirjoittanut = kirjoittanut
-        self.kirjat = []
-        if nimi not in self.kirjat:
-            self.kirjat.append(nimi)
+class Publication:
+    def __init__(self, publication_name):
+        self.publication_name = publication_name
 
-    def tulosta_tiedot(self):
-        if self.nimi in self.kirjat:
-            nimi = super().tulosta_tiedot()
-            return f"nimi:{self.nimi}\n sivut:{self.sivut}\n kirjoittanut:{self.kirjoittanut}"
+    def get_publication_details(self):
+        return f"name:{self.publication_name}"
 
 
-class Lehti(Julkaisu):
-    def __init__(self, nimi, päätoimittaja):
-        self.päätoimittaja = päätoimittaja
-        super().__init__(nimi)
-        self.lehdet = []
-        if self.lehdet not in self.lehdet:
-            self.lehdet.append(nimi)
+# Book class is a subclass for Publication
+class Book(Publication):
+    def __init__(self, publication_name, pages, author):
+        super().__init__(publication_name)
+        self.pages = pages
+        self.author = author
+        self.list_of_books = []
+        if publication_name not in self.list_of_books:
+            self.list_of_books.append(publication_name)
 
-    def tulosta_tiedot(self):
-        if self.nimi in self.lehdet:
-            nimi = super().tulosta_tiedot()
-            return f" nimi:{self.nimi}\n päätoimittaja:{self.päätoimittaja}\n"
-#pääohjelma
-ankka = Lehti("Aku Ankka", "Aki Hyyppä")
-hytti = Kirja("Hytti no:6", 200, "Rosa Liksom")
-print(ankka.tulosta_tiedot(), hytti.tulosta_tiedot())
+    def get_publication_details(self):
+        if self.publication_name in self.list_of_books:
+            return f"name:{self.publication_name}\n" \
+                   f"pages:{self.pages}\n" \
+                   f"author:{self.author}\n"
+
+
+# Magazine is a subclass for Publication
+class Magazine(Publication):
+    def __init__(self, publication_name, editor_in_chief):
+        self.editor_in_chief = editor_in_chief
+        super().__init__(publication_name)
+        self.magazine_list = []
+        if self.magazine_list not in self.magazine_list:
+            self.magazine_list.append(publication_name)
+
+    def get_publication_details(self):
+        if self.publication_name in self.magazine_list:
+            return f"name:{self.publication_name}\n" \
+                   f"editor in chief:{self.editor_in_chief}\n"
+
+
+# main program to test the classes, the publications are in Finnish language.
+donald_duck = Magazine("Aku Ankka", "Aki Hyyppä")
+cabin_number_six = Book("Hytti no:6", 200, "Rosa Liksom")
+print(f"{donald_duck.get_publication_details()}\n"
+      f"{cabin_number_six.get_publication_details()}")
