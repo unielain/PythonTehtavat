@@ -1,33 +1,35 @@
-class Auto:
-    def __init__(self, rekisteritunnus, huippunopeus):
-        self.rekisteritunnus = rekisteritunnus
-        self.huippunopeus = huippunopeus
-        self.nopeus_nyt = 0
-        self.kuljettu_matka = 0
+# an another improvement to the Cars class
+class Car:
+    def __init__(self, register, top_speed):
+        self.register = register
+        self.top_speed = top_speed
+        self.current_speed = 0
+        self.km_meter = 0
 
-    def kiihdyta(self, nopeuden_muutos):
-        if self.nopeus_nyt + nopeuden_muutos >= 0 and self.nopeus_nyt + nopeuden_muutos <= self.huippunopeus:
-            self.nopeus_nyt += nopeuden_muutos
-        elif self.nopeus_nyt + nopeuden_muutos > self.huippunopeus:
-            self.nopeus_nyt = self.huippunopeus
-        elif self.nopeus_nyt + nopeuden_muutos < 0:
-            self.nopeus_nyt = 0
-    def kulje(self, tunnit):
-        matka = tunnit * self.nopeus_nyt
-        self.kuljettu_matka = int(matka)
+    def speed(self, dispatch):
+        if 0 <= self.current_speed + dispatch <= self.top_speed:
+            self.current_speed += dispatch
+        elif self.current_speed + dispatch > self.top_speed:
+            self.current_speed = self.top_speed
+        elif self.current_speed + dispatch < 0:
+            self.current_speed = 0
+    def travel(self, hours):
+        travelled = hours * self.current_speed
+        self.km_meter = int(travelled)
 
 
-
-#Pääohjelma
-auto = Auto("ABC-123", 142)
-print(f"rekisteritunnus: {auto.rekisteritunnus:s}\nhuippunopeus: {auto.huippunopeus:d}km/h")
-print(f"tämänhetkinen nopeus: {auto.nopeus_nyt:d}km/h\nkuljettu matka: {auto.kuljettu_matka:d}km.")
-auto.kiihdyta(70)
-auto.kiihdyta(30)
-auto.kiihdyta(50)
-print(f"tämänhetkinen nopeus:{auto.nopeus_nyt:d}km/h")
-auto.kiihdyta(-200)
-print(f"tämänhetkinen nopeus:{auto.nopeus_nyt:d}km/h")
-auto.kiihdyta(60)
-auto.kulje(1.5)
-print(f"kuljettu matka: {auto.kuljettu_matka:d}km.")
+# main program to test the function
+volvo = Car("ABC-123", 142)
+print(f"register: {volvo.register:s}\n"
+      f"top speed: {volvo.top_speed:d}km/h\n"
+      f"current speed: {volvo.current_speed:d}km/h\n"
+      f"travelled: {volvo.km_meter:d}km.")
+volvo.speed(70)
+volvo.speed(30)
+volvo.speed(50)
+print(f"current speed:{volvo.current_speed:d}km/h")
+volvo.speed(-200)
+print(f"current speed:{volvo.current_speed:d}km/h")
+volvo.speed(60)
+volvo.travel(1.5)
+print(f"travelled: {volvo.km_meter:d}km.")
