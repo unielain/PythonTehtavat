@@ -1,6 +1,5 @@
 # a simple program that detects if a number given by the user is prime number or not
-number = int(input("Anna luku: "))
-i = 0
+number = int(input("Give a number: "))
 dividers = [2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 # we can't use len as a range, since we remove one number
