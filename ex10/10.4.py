@@ -57,7 +57,7 @@ def rekisteri(i):
     num = str(i)
     car_reg = "ABC-" + num
     return car_reg
-#auton huippunopeus
+#auton top_speed
 def speed():
     spd = random.randrange(100, 200)
     return spd

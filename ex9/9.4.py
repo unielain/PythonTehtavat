@@ -1,51 +1,69 @@
+# a program that uses the Car class to a race
 import random
-class Auto:
-    def __init__(self, rekisteritunnus, huippunopeus):
-        self.rekisteritunnus = rekisteritunnus
-        self.huippunopeus = huippunopeus
-        self.nopeus_nyt = 0
-        self.kuljettu_matka = 0
+class Car:
+    def __init__(self, register, top_speed):
+        self.register = register
+        self.top_speed = top_speed
+        self.current_speed = 0
+        self.km_meter = 0
 
-    def kiihdyta(self, nopeuden_muutos):
-        if self.nopeus_nyt + nopeuden_muutos >= 0 and self.nopeus_nyt + nopeuden_muutos <= self.huippunopeus:
-            self.nopeus_nyt += nopeuden_muutos
-        elif self.nopeus_nyt + nopeuden_muutos > self.huippunopeus:
-            self.nopeus_nyt = self.huippunopeus
-        elif self.nopeus_nyt + nopeuden_muutos < 0:
-            self.nopeus_nyt = 0
-    def kulje(self, tunnit):
-        matka = tunnit * self.nopeus_nyt
-        self.kuljettu_matka += int(matka)
-def register(i):
-    num = str(i)
-    car_reg = "ABC-" + num
-    return car_reg
-def speed():
-    spd = random.randrange(100,200)
-    return spd
-def arvo_nopeus():
-    wroom = random.randrange(-10,15)
-    return wroom
+    def speed(self, current_speed):
+        if 0 <= self.current_speed + current_speed <= self.top_speed:
+            self.current_speed += current_speed
+        elif self.current_speed + current_speed > self.top_speed:
+            self.current_speed = self.top_speed
+        elif self.current_speed + current_speed < 0:
+            self.current_speed = 0
 
-#Pääohjelma
+    def travel(self, hours):
+        travelled = hours * self.current_speed
+        self.km_meter += int(travelled)
+
+
+# functions to factor register plate, top speed, and dispatch
+def factor_register(plate_number):
+    car_number = str(plate_number)
+    register_plate = "ABC-" + car_number
+    return register_plate
+
+
+def factor_top_speed():
+    factored_top_speed = random.randrange(100, 200)
+    return factored_top_speed
+
+
+def dispatch_value():
+    factored_dispatch = random.randrange(-10, 15)
+    return factored_dispatch
+
+
+# main program with a car race to test the class
 cars = []
 for i in range(10):
-    car = Auto(register(i+1),speed())
+    car = Car(factor_register(i + 1), factor_top_speed())
     cars.append(car)
-voittaja = False
-while voittaja != True:
+winner = False
+while not winner:
     for car in cars:
-        car.kiihdyta(arvo_nopeus())
+        car.speed(dispatch_value())
     for car in cars:
-        car.kulje(1)
+        car.travel(1)
     for car in cars:
-        if car.kuljettu_matka >= 10000:
-            voittaja = True
-            print(f"Voittaja on {car.rekisteritunnus:s}")
+        if car.km_meter >= 10000:
+            winner = True
+            print(f"The winner is: {car.register:s}\n")
             break
-autoi = {}
+
+# prints the statistics of the car race
+title_statistics = "* RACE STATISTICS *"
+frame_statistics = "*" * len(title_statistics)
+print(f"{frame_statistics}\n"
+      f"{title_statistics}\n"
+      f"{frame_statistics}")
+
+race_cars = {}
 for car in cars:
-    autoi["register"] = car.rekisteritunnus
-    autoi["top speed"] = car.huippunopeus
-    autoi["driven km"] = car.kuljettu_matka
-    print(autoi)
+    race_cars["register"] = car.register
+    race_cars["top speed"] = car.top_speed
+    race_cars["driven km"] = car.km_meter
+    print(race_cars)
