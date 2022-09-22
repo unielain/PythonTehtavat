@@ -50,7 +50,7 @@ def get_longitude(get_the_place):
 # function that gets the weather
 def get_the_weather(lat, long):
     get_place_weather = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}" \
-              f"&appid=b0fd0200dc71a71449b2ba70e6853d1a"
+              f"{secrets.API_KEY}"
     weather = requests.get(get_place_weather).json()
     degrees = weather["main"]["temp"]
     kelvins_to_celcius = -272.15 / degrees
