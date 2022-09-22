@@ -1,6 +1,7 @@
 import requests
 import json
 
+
 # a program that gets the longitude and latitude of a place and prints the weather as celcius degrees
 
 
@@ -23,7 +24,7 @@ def object_to_float(convertable_object):
 # function that fetches the latitude
 def get_latitude(get_the_place):
     get_place_info = f"http://api.openweathermap.org/geo/1.0/direct?q={get_the_place}" \
-                     f"&appid=b0fd0200dc71a71449b2ba70e6853d1a"
+                     f"{secrets.API_KEY}"
     data = requests.get(get_place_info).json()
     get_lat_formatted = json.dumps(data)
     index_of_lat = get_lat_formatted.find('"lat": ')
@@ -36,7 +37,7 @@ def get_latitude(get_the_place):
 # function that fetches the longitude
 def get_longitude(get_the_place):
     get_place_info = f"http://api.openweathermap.org/geo/1.0/direct?q={get_the_place}" \
-                     f"&appid=b0fd0200dc71a71449b2ba70e6853d1a"
+                     f"{secrets.API_KEY}"
     data = requests.get(get_place_info).json()
     get_lon_formatted = json.dumps(data)
     index_of_lon = get_lon_formatted.find('"lon": ')
