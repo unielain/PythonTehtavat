@@ -8,12 +8,14 @@ def find_icao(icao_code):
     cursor_find_icao = connection.cursor()
     cursor_find_icao.execute(sql)
     result = cursor_find_icao.fetchall()
+    airport = ""
+
     if cursor_find_icao.rowcount > 0:
         for row in result:
-            print(f"The ICAO belongs to {row[0]}")
+            airport = f"The ICAO belongs to {row[0]}"
     else:
-        print(f"Could not find any airport with {icao_code}")
-    return
+        airport = f"Could not find any airport with {icao_code}"
+    return airport
 
 
 # Connection to database
