@@ -1,49 +1,64 @@
 import requests
 import json
 
-#funktio muuttaa API:sta saadut arvot oikeaan muotoon
-def objekti_floatiksi(merkkijono):
+# a program that gets the longitude and latitude of a place and prints the weather as celcius degrees
+
+
+# a function that converts json object to a float number
+def object_to_float(convertable_object):
     i = 0
-    leikattumjono = merkkijono
-    asteet = []
-    while i < len(leikattumjono):
-        if leikattumjono[i].isdigit() or leikattumjono[i] == ".":
-            vain_tarpeellinen = leikattumjono[i]
-            asteet.append(vain_tarpeellinen)
+    cut_string = convertable_object
+    list_of_degrees = []
+    while i < len(cut_string):
+        if cut_string[i].isdigit() or cut_string[i] == ".":
+            only_necessary = cut_string[i]
+            list_of_degrees.append(only_necessary)
         i += 1
-    mjono = ' '.join(asteet)
-    ilmanvaleja = mjono.replace(" ", "")
-    tulos = float(ilmanvaleja)
-    return tulos
+    convertable_string = ' '.join(list_of_degrees)
+    spaces_removed = convertable_string.replace(" ", "")
+    degrees_in_float = float(spaces_removed)
+    return degrees_in_float
 
-#funktio tuottaa leveysasteen
-def leveys_aste(paikkakunta):
-    paikka = f"http://api.openweathermap.org/geo/1.0/direct?q={paikkakunta}&appid=b0fd0200dc71a71449b2ba70e6853d1a"
-    data = requests.get(paikka).json()
-    mjono = json.dumps(data)
-    indeksi = mjono.find('"lat": ')
-    indeksi2 = mjono.find(' "lon": ')
-    leikattumjono = mjono[indeksi:indeksi2]
-    leveys = objekti_floatiksi(leikattumjono)
-    return leveys
 
-#funktio tuottaa pituusasteen
-def pituus_aste(paikkakunta):
-    paikka = f"http://api.openweathermap.org/geo/1.0/direct?q={paikkakunta}&appid=b0fd0200dc71a71449b2ba70e6853d1a"
-    data = requests.get(paikka).json()
-    mjono = json.dumps(data)
-    indeksi = mjono.find('"lon": ')
-    indeksi2 = mjono.find(' "contry":')
-    leikattumjono = mjono[indeksi:indeksi2]
-    pituus = objekti_floatiksi(leikattumjono)
-    return pituus
-def saa_haku(lat, long):
-    säätila = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid=b0fd0200dc71a71449b2ba70e6853d1a"
-    ilma = requests.get(säätila).json()
-    print(json.dumps(ilma, indent=2))
+# function that fetches the latitude
+def get_latitude(get_the_place):
+    get_place_info = f"http://api.openweathermap.org/geo/1.0/direct?q={get_the_place}" \
+                     f"&appid=b0fd0200dc71a71449b2ba70e6853d1a"
+    data = requests.get(get_place_info).json()
+    get_lat_formatted = json.dumps(data)
+    index_of_lat = get_lat_formatted.find('"lat": ')
+    lat_ends_index = get_lat_formatted.find(' "lon": ')
+    cut_string = get_lat_formatted[index_of_lat:lat_ends_index]
+    latitude = object_to_float(cut_string)
+    return latitude
 
-latid = leveys_aste("Helsinki")
-print(latid)
-longit = pituus_aste("Helsinki")
-print(longit)
-saa_haku(latid, longit)
+
+# function that fetches the longitude
+def get_longitude(get_the_place):
+    get_place_info = f"http://api.openweathermap.org/geo/1.0/direct?q={get_the_place}" \
+                     f"&appid=b0fd0200dc71a71449b2ba70e6853d1a"
+    data = requests.get(get_place_info).json()
+    get_lon_formatted = json.dumps(data)
+    index_of_lon = get_lon_formatted.find('"lon": ')
+    lon_ends_index = get_lon_formatted.find(' "contry":')
+    cut_string = get_lon_formatted[index_of_lon:lon_ends_index]
+    longitude = object_to_float(cut_string)
+    return longitude
+
+
+# function that gets the weather
+def get_the_weather(lat, long):
+    get_place_weather = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}" \
+              f"&appid=b0fd0200dc71a71449b2ba70e6853d1a"
+    weather = requests.get(get_place_weather).json()
+    degrees = weather["main"]["temp"]
+    kelvins_to_celcius = -272.15 / degrees
+    return round(kelvins_to_celcius, 2)
+
+
+# main program to test the function
+place = "Helsinki"
+latitude_main = get_latitude(place)
+longitude_main = get_longitude(place)
+celcius_main = get_the_weather(latitude_main, longitude_main)
+print(f"It is {celcius_main} C\u00B0 in {place} currently")
