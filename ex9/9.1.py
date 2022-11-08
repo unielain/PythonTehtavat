@@ -13,6 +13,6 @@ class Car:
 
 volvo = Car("ABC-123", 142)
 print(f"register: {volvo.register:s}\n"
-      f"top speed: {volvo.top_speed:d}km/h\n"
-      f"current speed: {volvo.current_speed:d}km/h\n"
-      f"driven: {volvo.km_meter:d}km.")
+      f"top speed: {volvo.top_speed:d} km/h\n"
+      f"current speed: {volvo.current_speed:d} km/h\n"
+      f"driven: {volvo.km_meter:d} km.")
