@@ -13,11 +13,11 @@ def get_the_weather(country):
 
 
 # main program to test the function
-place = "Helsinki"
-celcius_main = get_the_weather(place)
-print(f"It is {celcius_main} C\u00B0 in {place} currently")
+try:
+    place = input("Give a city: ")
+    celcius_main = get_the_weather(place)
+    print(f"It is {celcius_main} C\u00B0 in {place} currently")
+except:
+    print("Oops! Something went wrong!")
 
-place = "Ankara"
-celcius_main = get_the_weather(place)
-print(f"It is {celcius_main} C\u00B0 in {place} currently")
 
